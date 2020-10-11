@@ -105,8 +105,6 @@ const jsLoaders = () => {
 const plugins = () => {
   'use strict';
 
-
-
   const base = [
     new CleanWebpackPlugin(),
     // Заменяет текст в результирующем пакете для любых экземпляров process.env.

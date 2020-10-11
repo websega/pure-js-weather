@@ -76,10 +76,7 @@ window.addEventListener('DOMContentLoaded', () => {
   };
 
   // запросы к weather api
-  const getCityWeather = (city) =>
-    weatherApi.cityWeather(city).catch((err) => {
-      console.log('снаружи', err);
-    });
+  const getCityWeather = (city) => weatherApi.cityWeather(city);
   const getForecast = (coords) => weatherApi.getForecast(coords);
   const getCoordWeather = (coords) => weatherApi.coordWeather(coords);
 
@@ -171,7 +168,6 @@ window.addEventListener('DOMContentLoaded', () => {
     const cityWeather = await getCityWeather(cityName);
 
     if (!cityWeather) {
-      console.log('no weather');
       return;
     }
 
