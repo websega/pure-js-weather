@@ -1,0 +1,33 @@
+.input {
+  &__label {
+    position: relative;
+
+    &::before {
+      @include pseudo();
+      background-image: url('../img/search.svg');
+      background-size: rem(28) rem(28);
+      height: rem(28);
+      width: rem(28);
+      left: rem(23);
+      top: rem(-6);
+    }
+  }
+
+  &__search {
+    @include font-sans(rem(18), $main-color, 400, normal);
+    width: rem(484);
+    height: rem(39);
+    padding-left: rem(69);
+    padding-bottom: rem(12);
+    appearance: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    background: none;
+    border-bottom: 1px solid $main-color;
+
+    &::placeholder {
+      @include font-sans(rem(18), $main-color, 400, normal);
+    }
+  }
+}

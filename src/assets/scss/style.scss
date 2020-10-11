@@ -1,0 +1,19 @@
+@import "helpers/variables";
+@import "helpers/functions";
+@import "helpers/mixins";
+
+/* Base */
+@import "base/general";
+@import "base/fonts";
+
+/* Blocks */
+@import "blocks/app";
+@import "blocks/header";
+@import "blocks/input";
+@import "blocks/info";
+@import "blocks/weather-details";
+@import "blocks/tabs";
+@import "blocks/forecast";
+
+/* Helpers */
+// @import "helpers/helpers";

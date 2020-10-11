@@ -1,0 +1,26 @@
+.tabs {
+  margin-bottom: rem(17);
+
+  &__tab {
+    position: relative;
+    @include font-sans(rem(16), $main-color, 600, normal);
+    background: none;
+    border: none;
+    padding: 0;
+
+    transition: color 0.2s ease-in;
+
+    &:hover {
+      cursor: pointer;
+      color: #f25022;
+    }
+
+    &:not(:last-child) {
+      margin-right: rem(20);
+    }
+
+    &--active {
+      color: #f25022;
+    }
+  }
+}

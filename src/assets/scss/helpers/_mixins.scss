@@ -1,0 +1,97 @@
+/* Media */
+$breakpoints: (
+  'phone': 320px,
+  'phone-wide': 480px,
+  'phablet': 560px,
+  'tablet-small': 640px,
+  'tablet': 768px,
+  'tablet-wide': 1024px,
+  'desktop': 1248px,
+  'desktop-wide': 1440px,
+);
+
+@mixin mq($width, $type: max) {
+  @if map_has_key($breakpoints, $width) {
+    $width: map_get($breakpoints, $width);
+
+    @if $type==max {
+      $width: $width - 1px;
+    }
+
+    @media only screen and (#{$type}-width: $width) {
+      @content;
+    }
+  }
+}
+
+/* Style */
+@mixin display($display, $content: center, $align: center) {
+  display: $display;
+  justify-content: $content;
+  align-items: $align;
+}
+
+@mixin pseudo($display: block, $pos: absolute, $content: '') {
+  content: $content;
+  display: $display;
+  position: $pos;
+}
+
+/* Fonts */
+@mixin font-sans(
+  $size: false,
+  $colour: false,
+  $weight: normal,
+  $style: normal,
+  $lh: false
+) {
+  font-family: 'Open Sans', sans-serif;
+
+  @if $size {
+    font-size: $size;
+  }
+
+  @if $colour {
+    color: $colour;
+  }
+  @if $weight {
+    font-weight: $weight;
+  }
+
+  @if $style {
+    font-style: $style;
+  }
+
+  @if $lh {
+    line-height: $lh;
+  }
+}
+
+@mixin font-roboto(
+  $size: false,
+  $colour: false,
+  $weight: normal,
+  $style: normal,
+  $lh: false
+) {
+  font-family: 'Roboto', sans-serif;
+
+  @if $size {
+    font-size: $size;
+  }
+
+  @if $colour {
+    color: $colour;
+  }
+  @if $weight {
+    font-weight: $weight;
+  }
+
+  @if $style {
+    font-style: $style;
+  }
+
+  @if $lh {
+    line-height: $lh;
+  }
+}

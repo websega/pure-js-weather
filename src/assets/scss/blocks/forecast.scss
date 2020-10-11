@@ -1,0 +1,30 @@
+.forecast {
+  @include display(flex, space-around, center);
+
+  &__item {
+    max-width: rem(120);
+    text-align: left;
+  }
+
+  &__time {
+    @include font-sans(rem(16), $main-color, 400, normal);
+    margin-bottom: rem(10);
+  }
+
+  &__icon {
+    width: rem(42);
+    height: rem(42);
+  }
+
+  &__value {
+    @include font-sans(rem(48), $main-color, 600, normal);
+  }
+
+  &__scale {
+    @include font-sans(rem(24), $main-color, 600, normal);
+  }
+
+  &:not(:last-child) {
+    margin-right: rem(45);
+  }
+}

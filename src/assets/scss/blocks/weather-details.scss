@@ -1,0 +1,26 @@
+.weather-details {
+  @include display(flex, center, center);
+  margin-bottom: rem(180);
+
+  &__item {
+    @include display(flex, center, flex-start);
+
+    &:not(:last-child) {
+      margin-right: rem(68);
+    }
+  }
+
+  &__icon {
+    width: rem(32);
+    height: rem(32);
+    margin-right: rem(14);
+  }
+
+  &__title {
+    @include font-sans(rem(24), $main-color, 400, normal);
+  }
+
+  &__value {
+    @include font-sans(rem(36), $main-color, 400, normal);
+  }
+}

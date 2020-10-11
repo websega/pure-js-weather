@@ -1,0 +1,14 @@
+# vscode setting folder
+.vscode
+# node
+node_modules
+# build
+dist
+# stats file
+stats.json
+# firebase
+.firebase
+.firebaserc
+firebase.json
+# env
+.env

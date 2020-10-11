@@ -1,0 +1,45 @@
+.info {
+  @include display(flex, center, flex-end);
+  margin-bottom: rem(51);
+
+  &__temperature {
+    margin-right: rem(65);
+  }
+
+  &__value {
+    @include font-sans(rem(100), $main-color, 600, normal);
+    text-transform: uppercase;
+  }
+
+  &__scale {
+    @include font-sans(rem(64), $main-color, 600, normal);
+    text-transform: uppercase;
+  }
+
+  &__body {
+    @include display(flex, center, center);
+  }
+
+  &__cityname {
+    @include font-sans(rem(64), $main-color, 600, normal);
+    margin-right: rem(48);
+  }
+
+  &__icon {
+    width: rem(100);
+    height: rem(100);
+  }
+
+  &__downside {
+    @include display(flex, space-around, center);
+  }
+
+  &__date {
+    @include font-sans(rem(24), $main-color, 600, normal);
+    margin-right: rem(20);
+  }
+
+  &__weather-description {
+    @include font-sans(rem(24), $main-color, 600, normal);
+  }
+}

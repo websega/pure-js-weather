@@ -1,0 +1,12 @@
+.header {
+  @include display(flex, space-between, center);
+  margin-bottom: rem(116);
+
+  &__autor {
+    @include font-sans(rem(18), $main-color, 400, normal);
+  }
+
+  &__link {
+    @include font-sans(rem(18), $main-color, 400, normal);
+  }
+}
