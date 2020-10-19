@@ -12,6 +12,7 @@ window.addEventListener('DOMContentLoaded', () => {
   const autorName = document.querySelector('.header__name');
   let selectedTab = null;
   const coord = { lon: 0, lat: 0 };
+  let forecast = {};
 
   const months = [
     'Января',
@@ -186,14 +187,13 @@ window.addEventListener('DOMContentLoaded', () => {
     coord.lon = cityWeather.coord.lon;
     coord.lat = cityWeather.coord.lat;
 
-    const forecast = await getForecast(coord);
+    forecast = await getForecast(coord);
     renderDaily(forecast);
 
     e.target.input__search.value = '';
   };
 
   const tabHandler = async ({ target }) => {
-    const forecast = await getForecast(coord);
     const btn = target.closest('button');
 
     if (!btn) {
@@ -236,7 +236,7 @@ window.addEventListener('DOMContentLoaded', () => {
         setBackground(image.urls.full);
         renderAutor(image.user.links.html, image.user.name);
 
-        const forecast = await getForecast(coord);
+        forecast = await getForecast(coord);
 
         displayInfo(weather);
         renderDaily(forecast);
