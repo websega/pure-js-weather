@@ -101,34 +101,28 @@ window.addEventListener('DOMContentLoaded', () => {
     `;
   };
 
-  const renderDaily = ({ daily }) => {
+  const renderForecast = ({ daily, hourly }) => {
     forecastEl.innerText = '';
     let out = '';
 
-    daily.forEach((item) => {
-      const date = new Date(item.dt * 1000);
-      const day = `${days[date.getDay()]}`;
-      const icon = `${item.weather[0].icon.slice(0, 2)}`;
-      const temp = `${Math.round(item.temp.day)}`;
+    if (selectedTab === 'daily') {
+      daily.forEach((item) => {
+        const date = new Date(item.dt * 1000);
+        const day = `${days[date.getDay()]}`;
+        const icon = `${item.weather[0].icon.slice(0, 2)}`;
+        const temp = `${Math.round(item.temp.day)}`;
 
-      out += getForecastItem(day, icon, temp);
-    });
+        out += getForecastItem(day, icon, temp);
+      });
+    } else {
+      hourly.slice(0, 12).forEach((item) => {
+        const date = new Date(item.dt * 1000);
+        const time = `${date.getHours()}:0${date.getMinutes()}`;
+        const icon = `${item.weather[0].icon.slice(0, 2)}`;
+        const temp = `${Math.round(item.temp)}`;
 
-    forecastEl.insertAdjacentHTML('beforeend', out);
-  };
-
-  const renderHourly = ({ hourly }) => {
-    forecastEl.innerText = '';
-    let out = '';
-
-    for (let i = 0; i < 12; i++) {
-      const item = hourly[i];
-      const date = new Date(item.dt * 1000);
-      const time = `${date.getHours()}:0${date.getMinutes()}`;
-      const icon = `${item.weather[0].icon.slice(0, 2)}`;
-      const temp = `${Math.round(item.temp)}`;
-
-      out += getForecastItem(time, icon, temp);
+        out += getForecastItem(time, icon, temp);
+      });
     }
 
     forecastEl.insertAdjacentHTML('beforeend', out);
@@ -188,7 +182,7 @@ window.addEventListener('DOMContentLoaded', () => {
     coord.lat = cityWeather.coord.lat;
 
     forecast = await getForecast(coord);
-    renderDaily(forecast);
+    renderForecast(forecast);
 
     e.target.input__search.value = '';
   };
@@ -204,13 +198,12 @@ window.addEventListener('DOMContentLoaded', () => {
 
     if (btn.id === 'daily') {
       selectedTab = 'daily';
-      setActiveCls(tabsBtns);
-      renderDaily(forecast);
     } else {
       selectedTab = 'hourly';
-      setActiveCls(tabsBtns);
-      renderHourly(forecast);
     }
+
+    setActiveCls(tabsBtns);
+    renderForecast(forecast);
   };
 
   const init = () => {
@@ -239,7 +232,7 @@ window.addEventListener('DOMContentLoaded', () => {
         forecast = await getForecast(coord);
 
         displayInfo(weather);
-        renderDaily(forecast);
+        renderForecast(forecast);
       };
 
       const geoError = (error) => {
