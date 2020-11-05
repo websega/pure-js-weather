@@ -25,10 +25,7 @@
   </head>
 
   <body>
-    <div
-      class="app"
-      style="background-image: url('assets/img/mosty-cloudy.jpg');"
-    >
+    <div class="app">
       <header class="header">
         <form class="header__form">
           <label for="input-search" class="input__label">
@@ -54,83 +51,13 @@
         </div>
       </header>
 
-      <div class="info">
-        <div class="info__temperature">
-          <span class="info__value">8&#176;</span>
-          <span class="info__scale">C</span>
-        </div>
+      <div class="info"></div>
 
-        <div class="info__item">
-          <div class="info__body">
-            <div class="info__cityname">City</div>
-            <img class="info__icon" alt="icon" />
-          </div>
-
-          <div class="info__downside">
-            <div class="info__date"></div>
-
-            <div class="info__weather-description">Описание</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="weather-details">
-        <div class="weather-details__item">
-          <img
-            class="weather-details__icon"
-            src="assets/img/cloud-details.svg"
-            alt="icon"
-          />
-          <div>
-            <div class="weather-details__title">Облачность</div>
-            <div class="weather-details__value cloudy">88%</div>
-          </div>
-        </div>
-
-        <div class="weather-details__item">
-          <img
-            class="weather-details__icon"
-            src="assets/img/humidity-details.svg"
-            alt="icon"
-          />
-          <div>
-            <div class="weather-details__title">Влажность</div>
-            <div class="weather-details__value humidity">62%</div>
-          </div>
-        </div>
-
-        <div class="weather-details__item">
-          <img
-            class="weather-details__icon"
-            src="assets/img/wind-details.svg"
-            alt="icon"
-          />
-          <div>
-            <div class="weather-details__title">Ветер</div>
-            <div class="weather-details__value wind">2m/s</div>
-          </div>
-        </div>
-
-        <div class="weather-details__item">
-          <img
-            class="weather-details__icon"
-            src="assets/img/pressure-deatails.svg"
-            alt="icon"
-          />
-          <div>
-            <div class="weather-details__title">Давление</div>
-            <div class="weather-details__value pressure">8 hPa</div>
-          </div>
-        </div>
-      </div>
+      <div class="weather-details"></div>
 
       <div class="tabs">
-        <button class="tabs__tab" id="daily">
-          Daily
-        </button>
-        <button class="tabs__tab" id="hourly">
-          Hourly
-        </button>
+        <button class="tabs__tab" id="daily">Daily</button>
+        <button class="tabs__tab" id="hourly">Hourly</button>
       </div>
 
       <div class="forecast"></div>

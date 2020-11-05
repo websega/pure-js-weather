@@ -7,6 +7,8 @@ window.addEventListener('DOMContentLoaded', () => {
   const tabs = document.querySelector('.tabs');
   const forecastEl = document.querySelector('.forecast');
   const tabsBtns = document.querySelectorAll('.tabs__tab');
+  const info = document.querySelector('.info');
+  const weatherDetails = document.querySelector('.weather-details');
   const app = document.querySelector('.app');
   const autorLink = document.querySelector('.header__link');
   const autorName = document.querySelector('.header__name');
@@ -39,6 +41,14 @@ window.addEventListener('DOMContentLoaded', () => {
     'Суббота',
   ];
 
+  // запросы к weather api
+  const getCityWeather = (city) => weatherApi.cityWeather(city);
+  const getForecast = (coords) => weatherApi.getForecast(coords);
+  const getCoordWeather = (coords) => weatherApi.coordWeather(coords);
+
+  // запросы к unsplash api
+  const getImage = (word) => imageApi.image(word);
+
   const createDate = (d) => {
     const day = days[d.getDay()];
     const date = d.getDate();
@@ -48,41 +58,41 @@ window.addEventListener('DOMContentLoaded', () => {
     return `${day}, ${date} ${month} ${year}`;
   };
 
-  const displayInfo = (weather) => {
-    const temperature = document.querySelector('.info__value');
-    const city = document.querySelector('.info__cityname');
-    const date = document.querySelector('.info__date');
-    const cloudy = document.querySelector('.cloudy');
-    const humidity = document.querySelector('.humidity');
-    const wind = document.querySelector('.wind');
-    const pressure = document.querySelector('.pressure');
-    const bodyIcon = document.querySelector('.info__icon');
-    const description = document.querySelector('.info__weather-description');
+  const renderInfo = (weather) => {
+    info.innerText = '';
     const now = new Date();
+    const html = `
+    <div class="info__temperature">
+      <span class="info__value">
+        ${Math.round(weather.main.temp)}&#176;
+      </span>
+      <span class="info__scale">C</span>
+    </div>
 
-    temperature.innerHTML = `${Math.round(weather.main.temp)}&#176;`;
-    city.innerText = `${weather.name}`;
-    date.innerText = `${now.getHours()}:${now.getMinutes()} - ${createDate(
-      now
-    )}`;
-    cloudy.innerText = `${weather.clouds.all}%`;
-    humidity.innerText = `${weather.main.humidity}%`;
-    wind.innerText = `${weather.wind.speed}m/s`;
-    pressure.innerText = `${weather.main.pressure}hPa`;
-    description.innerText = `${weather.weather[0].description}`;
-    bodyIcon.setAttribute(
-      'src',
-      `assets/img/weather/${weather.weather[0].icon.slice(0, 2)}.svg`
-    );
+    <div class="info__item">
+      <div class="info__body">
+        <div class="info__cityname">
+          ${weather.name}
+        </div>
+        <img class="info__icon" src="assets/img/weather/${weather.weather[0].icon.slice(
+          0,
+          2
+        )}.svg" alt="weathericon" />
+      </div>
+
+      <div class="info__downside">
+        <div class="info__date">
+          ${now.getHours()}:${now.getMinutes()} - ${createDate(now)}
+        </div>
+        <div class="info__weather-description">${
+          weather.weather[0].description
+        }</div>
+      </div>
+    </div>
+    `;
+
+    info.insertAdjacentHTML('beforeend', html);
   };
-
-  // запросы к weather api
-  const getCityWeather = (city) => weatherApi.cityWeather(city);
-  const getForecast = (coords) => weatherApi.getForecast(coords);
-  const getCoordWeather = (coords) => weatherApi.coordWeather(coords);
-
-  // запросы к unsplash api
-  const getImage = (word) => imageApi.image(word);
 
   const getForecastItem = (time, icon, temp) => {
     return `
@@ -128,11 +138,66 @@ window.addEventListener('DOMContentLoaded', () => {
     forecastEl.insertAdjacentHTML('beforeend', out);
   };
 
+  const renderWeatherDetails = (weather) => {
+    weatherDetails.innerText = '';
+    const html = `
+    <div class="weather-details__item">
+          <img
+            class="weather-details__icon"
+            src="assets/img/cloud-details.svg"
+            alt="icon"
+          />
+          <div>
+            <div class="weather-details__title">Облачность</div>
+            <div class="weather-details__value cloudy">${weather.clouds.all}%</div>
+          </div>
+        </div>
+
+        <div class="weather-details__item">
+          <img
+            class="weather-details__icon"
+            src="assets/img/humidity-details.svg"
+            alt="icon"
+          />
+          <div>
+            <div class="weather-details__title">Влажность</div>
+            <div class="weather-details__value humidity">${weather.main.humidity}</div>
+          </div>
+        </div>
+
+        <div class="weather-details__item">
+          <img
+            class="weather-details__icon"
+            src="assets/img/wind-details.svg"
+            alt="icon"
+          />
+          <div>
+            <div class="weather-details__title">Ветер</div>
+            <div class="weather-details__value wind">${weather.wind.speed}m/s</div>
+          </div>
+        </div>
+
+        <div class="weather-details__item">
+          <img
+            class="weather-details__icon"
+            src="assets/img/pressure-deatails.svg"
+            alt="icon"
+          />
+          <div>
+            <div class="weather-details__title">Давление</div>
+            <div class="weather-details__value pressure">${weather.main.pressure}hPa</div>
+          </div>
+        </div>
+    `;
+
+    weatherDetails.insertAdjacentHTML('beforeend', html);
+  };
+
   const setBackground = (imgUrl) => {
     app.style.backgroundImage = `url(${imgUrl})`;
   };
 
-  const renderAutor = (url, name) => {
+  const renderAuthor = (url, name) => {
     autorLink.setAttribute('href', `${url}`);
     autorName.innerText = `${name}`;
   };
@@ -160,6 +225,7 @@ window.addEventListener('DOMContentLoaded', () => {
     if (!cityName.trim()) {
       return;
     }
+
     const cityWeather = await getCityWeather(cityName);
 
     if (!cityWeather) {
@@ -168,15 +234,16 @@ window.addEventListener('DOMContentLoaded', () => {
 
     deleteCls(tabsBtns, 'tabs__tab--active');
 
-    // активный класс для первого таба
+    // сдулать активный класс для первого таба
     selectedTab = 'daily';
     setActiveCls(tabsBtns);
 
-    displayInfo(cityWeather);
+    renderInfo(cityWeather);
+    renderWeatherDetails(cityWeather);
 
     const image = await getImage(cityWeather.weather[0].main);
     setBackground(image.urls.full);
-    renderAutor(image.user.links.html, image.user.name);
+    renderAuthor(image.user.links.html, image.user.name);
 
     coord.lon = cityWeather.coord.lon;
     coord.lat = cityWeather.coord.lat;
@@ -207,9 +274,7 @@ window.addEventListener('DOMContentLoaded', () => {
   };
 
   const init = () => {
-    deleteCls(tabsBtns, 'tabs__tab--active');
-
-    // активный класс для первого таба
+    // сдулать активный класс для первого таба
     selectedTab = 'daily';
     setActiveCls(tabsBtns);
 
@@ -227,11 +292,12 @@ window.addEventListener('DOMContentLoaded', () => {
 
         const image = await getImage(weather.weather[0].main);
         setBackground(image.urls.full);
-        renderAutor(image.user.links.html, image.user.name);
+        renderAuthor(image.user.links.html, image.user.name);
 
         forecast = await getForecast(coord);
 
-        displayInfo(weather);
+        renderInfo(weather);
+        renderWeatherDetails(weather);
         renderForecast(forecast);
       };
 
