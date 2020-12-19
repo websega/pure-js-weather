@@ -161,7 +161,7 @@ window.addEventListener('DOMContentLoaded', () => {
           />
           <div>
             <div class="weather-details__title">Влажность</div>
-            <div class="weather-details__value humidity">${weather.main.humidity}</div>
+            <div class="weather-details__value humidity">${weather.main.humidity}%</div>
           </div>
         </div>
 
@@ -234,7 +234,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     deleteCls(tabsBtns, 'tabs__tab--active');
 
-    // сдулать активный класс для первого таба
+    // сделать активный класс для первого таба
     selectedTab = 'daily';
     setActiveCls(tabsBtns);
 
@@ -274,7 +274,7 @@ window.addEventListener('DOMContentLoaded', () => {
   };
 
   const init = () => {
-    // сдулать активный класс для первого таба
+    // сделать активный класс для первого таба
     selectedTab = 'daily';
     setActiveCls(tabsBtns);
 

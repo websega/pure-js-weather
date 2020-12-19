@@ -2,7 +2,7 @@
 
 ![license](https://img.shields.io/github/license/websega/pure-js-weather "license")
 
-Погодное приложение, используещее api [openweather](https://openweathermap.org/api) для получения погодных данных и [unsplash](https://unsplash.com/developers) для вывода фонового изображения.
+Погодное приложение, использующее api [openweather](https://openweathermap.org/api) для получения погодных данных и [unsplash](https://unsplash.com/developers) для вывода фонового изображения.
 
 ##### Install
 

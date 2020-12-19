@@ -17,7 +17,7 @@
     "url": "git+https://github.com/websega/pure-js-weather.git"
   },
   "author": "Sergey Vakhramov <vsa8813@gmail.com>",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/websega/pure-js-weather/issues"
   },
