@@ -198,7 +198,10 @@ window.addEventListener('DOMContentLoaded', () => {
   };
 
   const renderAuthor = (url, name) => {
-    autorLink.setAttribute('href', `${url}`);
+    autorLink.setAttribute(
+      'href',
+      `${url}?utm_source=weather_app&utm_medium=referral`
+    );
     autorName.innerText = `${name}`;
   };
 
