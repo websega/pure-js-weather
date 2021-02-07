@@ -6,7 +6,7 @@
 
 [Кликни, чтобы посмотреть](https://www.google.com)
 
-![alt text](https://github.com/websega/Weather-app/preview.png?raw=true)
+![alt text](https://github.com/websega/pure-js-weather/preview.png?raw=true)
 
 ##### Install
 
