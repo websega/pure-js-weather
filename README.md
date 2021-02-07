@@ -4,6 +4,10 @@
 
 Погодное приложение, использующее api [openweather](https://openweathermap.org/api) для получения погодных данных и [unsplash](https://unsplash.com/developers) для вывода фонового изображения.
 
+[Кликни, чтобы посмотреть](https://www.google.com)
+
+![alt text](https://github.com/websega/Weather-app/preview.png?raw=true)
+
 ##### Install
 
 1. Установить пакеты  ```npm i```
