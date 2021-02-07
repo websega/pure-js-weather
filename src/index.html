@@ -26,49 +26,53 @@
 
   <body>
     <div class="app">
-      <header class="header">
-        <form class="header__form">
-          <label for="input-search" class="input__label">
-            <input
-              name="input__search"
-              class="input__search"
-              id="input-search"
-              type="text"
-              placeholder="Search another sity"
-            />
-          </label>
-        </form>
+      <div class="overlay">
+        <header class="header">
+          <form class="header__form">
+            <label for="input-search" class="input__label">
+              <input
+                name="input__search"
+                class="input__search"
+                id="input-search"
+                type="text"
+                placeholder="Search another sity"
+              />
+            </label>
+          </form>
 
-        <div class="header__autor">
-          Автор фото:&nbsp;
-          <a
-            class="header__link"
-            href="http://"
-            target="_blank"
-            rel="noopener noreferrer"
-            ><span class="header__name">websega</span></a
-          >
-          <span>на</span>
-          <a
-            class="header__link"
-            href="https://unsplash.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            ><span class="header__name">Unsplash.com</span></a
-          >
+          <div class="header__autor">
+            Автор фото:&nbsp;
+            <a
+              class="header__link"
+              href="http://"
+              target="_blank"
+              rel="noopener noreferrer"
+              ><span class="header__name">websega</span></a
+            >
+            <span>на</span>
+            <a
+              class="header__link"
+              href="https://unsplash.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              ><span class="header__name">Unsplash.com</span></a
+            >
+          </div>
+        </header>
+
+        <div class="info"></div>
+
+        <div class="weather-details"></div>
+
+        <div class="tabs">
+          <button class="tabs__tab" id="daily">Daily</button>
+          <button class="tabs__tab" id="hourly">Hourly</button>
         </div>
-      </header>
 
-      <div class="info"></div>
-
-      <div class="weather-details"></div>
-
-      <div class="tabs">
-        <button class="tabs__tab" id="daily">Daily</button>
-        <button class="tabs__tab" id="hourly">Hourly</button>
+        <div>
+          <div class="forecast"></div>
+        </div>
       </div>
-
-      <div class="forecast"></div>
     </div>
   </body>
 </html>

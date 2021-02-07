@@ -5,3 +5,10 @@
   padding: rem(89) rem(145);
   background-color: #446684;
 }
+
+.overlay {
+  background: rgba(80, 80, 80, 0.3);
+  backdrop-filter: blur(5px);
+  padding: 20px;
+  border-radius: 20px;
+}

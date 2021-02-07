@@ -17,7 +17,7 @@ class UnsplashApi {
           `Не удалось получить ${this.url}, код ошибки ${response.status}`
         );
       }
-      
+
       return response.json();
     } catch (err) {
       return Promise.reject(err);
