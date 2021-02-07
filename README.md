@@ -4,9 +4,9 @@
 
 Погодное приложение, использующее api [openweather](https://openweathermap.org/api) для получения погодных данных и [unsplash](https://unsplash.com/developers) для вывода фонового изображения.
 
-[Кликни, чтобы посмотреть](https://www.google.com)
+[Кликни, чтобы посмотреть](https://weather-c5499.web.app/)
 
-![alt text](https://github.com/websega/pure-js-weather/preview.png?raw=true)
+![alt text](./preview.png)
 
 ##### Install
 
