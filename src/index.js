@@ -284,13 +284,29 @@ window.addEventListener('DOMContentLoaded', () => {
   };
 
   /**
+   * Определить тип устройства
+   * @return {Boolean}
+   */
+  const isMobile = () => {
+    if (
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(
+        navigator.userAgent
+      )
+    ) {
+      console.log('Вы используете мобильное устройство (телефон или планшет).');
+      return true;
+    }
+    console.log('Вы используете ПК.');
+    return false;
+  };
+
+  /**
    * Получить адрес фото в зависимости от устройства
    * @param {Object} image объект с данными об фото
-   * @param {Boolean} isMobile
    * @return {String} адрес фото
    */
-  const getImageUrl = (image, isMobile) =>
-    isMobile ? image.urls.regular : image.urls.full;
+  const getImageUrl = (image) =>
+    isMobile() ? image.urls.regular : image.urls.full;
 
   /**
    * Обработка события на получение погоды по городу
@@ -354,20 +370,6 @@ window.addEventListener('DOMContentLoaded', () => {
   };
 
   const init = () => {
-    let isMobile = false;
-
-    if (
-      /Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(
-        navigator.userAgent
-      )
-    ) {
-      console.log('Вы используете мобильное устройство (телефон или планшет).');
-      isMobile = true;
-    } else {
-      console.log('Вы используете ПК.');
-      isMobile = false;
-    }
-
     // сделать активный класс для первого таба
     selectedTab = 'daily';
     setActiveCls(tabsBtns);
@@ -386,7 +388,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
         const image = await getImage(weather.weather[0].main);
 
-        setBackground(getImageUrl(image, isMobile));
+        setBackground(getImageUrl(image));
         renderAuthor(image.user.links.html, image.user.name);
 
         forecast = await getForecast(coord);
