@@ -49,6 +49,11 @@ window.addEventListener('DOMContentLoaded', () => {
   // запросы к unsplash api
   const getImage = (word) => imageApi.image(word);
 
+  /**
+   * Получение текушей даты
+   * @param {Date} d now date
+   * @return {String}  дата в формате day, date month year
+   */
   const createDate = (d) => {
     const day = days[d.getDay()];
     const date = d.getDate();
@@ -58,6 +63,10 @@ window.addEventListener('DOMContentLoaded', () => {
     return `${day}, ${date} ${month} ${year}`;
   };
 
+  /**
+   * Рендер информации о погоде
+   * @param {Object} weather объект с данными погоды
+   */
   const renderInfo = (weather) => {
     info.innerText = '';
 
@@ -81,8 +90,6 @@ window.addEventListener('DOMContentLoaded', () => {
         </div>
       </div>
 
-
-
       <div class="info__weather">
         <img class="info__icon" src="assets/img/weather/${weather.weather[0].icon.slice(
           0,
@@ -97,6 +104,13 @@ window.addEventListener('DOMContentLoaded', () => {
     info.insertAdjacentHTML('beforeend', html);
   };
 
+  /**
+   * Созднание верстки элемента прогноза
+   * @param {String} time время или день прогноза
+   * @param {String} icon имя иконки
+   * @param {String} temp температура
+   * @return {String} html строка
+   */
   const createForecastHTML = (time, icon, temp) => {
     return `
     <div class="forecast__item">
@@ -114,8 +128,13 @@ window.addEventListener('DOMContentLoaded', () => {
     `;
   };
 
+  /**
+   * Получить вёрстку прогноза
+   * @param {Array} array массив погодных данных
+   * @return {String} html строка
+   */
   const getForecastItems = (array) => {
-    let day = '';
+    let time = '';
     let icon = '';
     let temperature = '';
     let out = '';
@@ -123,7 +142,7 @@ window.addEventListener('DOMContentLoaded', () => {
     array.forEach((item) => {
       const date = new Date(item.dt * 1000);
 
-      day =
+      time =
         selectedTab === 'daily'
           ? `${days[date.getDay()]}`
           : `${date.getHours()}:0${date.getMinutes()}`;
@@ -135,12 +154,17 @@ window.addEventListener('DOMContentLoaded', () => {
           ? `${Math.round(item.temp.day)}`
           : `${Math.round(item.temp)}`;
 
-      out += createForecastHTML(day, icon, temperature);
+      out += createForecastHTML(time, icon, temperature);
     });
 
     return out;
   };
 
+  /**
+   * Вывести на страницу прогноз
+   * @param {Object} daily массив данных прогноза по дням
+   * @param {Object} hourly массив данных прогноза по часам
+   */
   const renderForecast = ({ daily, hourly }) => {
     forecastEl.innerText = '';
 
@@ -152,6 +176,10 @@ window.addEventListener('DOMContentLoaded', () => {
     forecastEl.insertAdjacentHTML('beforeend', items);
   };
 
+  /**
+   * Вывести на страницу детальные данные погоды
+   * @param {Object} weather объект поогоды
+   */
   const renderWeatherDetails = (weather) => {
     weatherDetails.innerText = '';
 
@@ -208,10 +236,19 @@ window.addEventListener('DOMContentLoaded', () => {
     weatherDetails.insertAdjacentHTML('beforeend', html);
   };
 
+  /**
+   * Установить бекграунд
+   * @param {String} imgUrl адрес фонового изображения
+   */
   const setBackground = (imgUrl) => {
     app.style.backgroundImage = `url(${imgUrl})`;
   };
 
+  /**
+   * Вывести на страницу инофрмацию об авторе фото
+   * @param {String} url адрес автора фото
+   * @param {String} name имя автора фото
+   */
   const renderAuthor = (url, name) => {
     autorLink.setAttribute(
       'href',
@@ -221,6 +258,11 @@ window.addEventListener('DOMContentLoaded', () => {
     autorName.innerText = `${name}`;
   };
 
+  /**
+   * Удалить класс
+   * @param {HTMLElement} elements массив табов
+   * @param {String} cls клaсс для удаления
+   */
   const deleteCls = (elements, cls) => {
     elements.forEach((item) => {
       if (item.classList.contains(cls)) {
@@ -229,6 +271,10 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   };
 
+  /**
+   * Установить активный класс
+   * @param {HTMLELement} elements массив табов
+   */
   const setActiveCls = (elements) => {
     elements.forEach((item) => {
       if (item.id === selectedTab) {
@@ -237,12 +283,22 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   };
 
+  /**
+   * Получить адрес фото в зависимости от устройства
+   * @param {Object} image объект с данными об фото
+   * @param {Boolean} isMobile
+   * @return {String} адрес фото
+   */
   const getImageUrl = (image, isMobile) =>
     isMobile ? image.urls.regular : image.urls.full;
 
+  /**
+   * Обработка события на получение погоды по городу
+   * @param {Event} e
+   */
   const submitHandler = async (e) => {
     e.preventDefault();
-    
+
     const cityName = e.target.input__search.value;
 
     if (!cityName.trim()) {
