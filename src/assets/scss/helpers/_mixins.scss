@@ -1,13 +1,15 @@
+// https://engageinteractive.co.uk/blog/top-10-scss-mixins
+
 /* Media */
 $breakpoints: (
-  'phone': 320px,
-  'phone-wide': 480px,
-  'phablet': 560px,
-  'tablet-small': 640px,
-  'tablet': 768px,
-  'tablet-wide': 1024px,
-  'desktop': 1248px,
-  'desktop-wide': 1440px,
+  'phone': 376px,
+  'phone-wide': 481px,
+  'phablet': 561px,
+  'tablet-small': 641px,
+  'tablet': 769px,
+  'tablet-wide': 1025px,
+  'desktop': 1249px,
+  'desktop-wide': 1441px,
 );
 
 @mixin mq($width, $type: max) {

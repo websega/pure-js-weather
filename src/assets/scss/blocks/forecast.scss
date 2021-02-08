@@ -1,27 +1,66 @@
 .forecast {
-  @include display(flex, space-around, center);
+  @include display(flex, space-between, center);
+
+  overflow-x: auto;
 
   &__item {
-    max-width: rem(120);
-    text-align: left;
+    text-align: center;
+    margin-right: rem(20);
   }
 
   &__time {
     @include font-sans(rem(16), $main-color, 400, normal);
     margin-bottom: rem(10);
+
+    @include mq('tablet-wide') {
+      font-size: rem(14);
+      font-weight: normal;
+    }
+
+    @include mq('tablet') {
+      font-size: rem(12);
+    }
   }
 
   &__icon {
     width: rem(42);
     height: rem(42);
+
+    @include mq('tablet-wide') {
+      width: rem(36);
+      height: rem(36);
+    }
+  }
+
+  &__temperature {
+    @include display(flex, center, flex-end);
   }
 
   &__value {
     @include font-sans(rem(48), $main-color, 600, normal);
+    margin-right: rem(10);
+
+    @include mq('tablet-wide') {
+      font-size: rem(22);
+    }
+
+    @include mq('tablet') {
+      font-size: rem(18);
+      font-weight: normal;
+    }
   }
 
   &__scale {
     @include font-sans(rem(24), $main-color, 600, normal);
+
+    @include mq('tablet-wide') {
+      font-size: rem(18);
+    }
+
+    @include mq('tablet') {
+      font-size: rem(16);
+      font-weight: normal;
+    }
   }
 
   &:not(:last-child) {

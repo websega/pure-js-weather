@@ -3,9 +3,20 @@
 
   &__tab {
     position: relative;
+
     @include font-sans(rem(16), $main-color, 600, normal);
+
+    @include mq('tablet-wide') {
+      font-size: rem(14);
+    }
+
+    @include mq('tablet-small') {
+      font-size: rem(12);
+    }
+
     background: none;
     border: none;
+
     padding: 0;
 
     transition: color 0.2s ease-in;

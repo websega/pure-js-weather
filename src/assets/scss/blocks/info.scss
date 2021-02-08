@@ -1,45 +1,166 @@
 .info {
-  @include display(flex, center, flex-end);
-  margin-bottom: rem(51);
+  @include display(flex, space-evenly, flex-end);
 
-  &__temperature {
-    margin-right: rem(65);
+  @include mq('phone-wide') {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 
   &__value {
     @include font-sans(rem(100), $main-color, 600, normal);
     text-transform: uppercase;
+
+    @include mq('desktop-wide') {
+      font-size: rem(70);
+    }
+
+    @include mq('tablet-wide') {
+      font-size: rem(52);
+    }
+
+    @include mq('tablet') {
+      font-size: rem(42);
+    }
+
+    @include mq('phablet') {
+      font-size: rem(36);
+    }
+
+    @include mq('phone') {
+      font-size: rem(42);
+    }
   }
 
   &__scale {
     @include font-sans(rem(64), $main-color, 600, normal);
     text-transform: uppercase;
+
+    @include mq('desktop-wide') {
+      font-size: rem(48);
+    }
+
+    @include mq('tablet-wide') {
+      font-size: rem(36);
+    }
+
+    @include mq('tablet') {
+      font-size: rem(28);
+    }
+
+    @include mq('phablet') {
+      font-size: rem(24);
+    }
+
+    @include mq('phone') {
+      font-size: rem(28);
+    }
   }
 
   &__body {
     @include display(flex, center, center);
+    flex-direction: column;
   }
 
   &__cityname {
     @include font-sans(rem(64), $main-color, 600, normal);
-    margin-right: rem(48);
+
+    @include mq('desktop-wide') {
+      font-size: rem(48);
+    }
+
+    @include mq('tablet-wide') {
+      font-size: rem(36);
+    }
+
+    @include mq('tablet') {
+      font-size: rem(28);
+      font-weight: normal;
+    }
+
+    @include mq('phablet') {
+      font-size: rem(24);
+    }
+
+    @include mq('phone') {
+      font-size: rem(28);
+    }
+  }
+
+  &__date {
+    @include font-sans(rem(24), $main-color, 600, normal);
+
+    @include mq('desktop-wide') {
+      font-size: rem(18);
+    }
+
+    @include mq('tablet-wide') {
+      font-size: rem(16);
+    }
+
+    @include mq('tablet') {
+      font-size: rem(14);
+      font-weight: normal;
+    }
+
+    @include mq('phablet') {
+      font-size: rem(12);
+    }
+
+    @include mq('phone') {
+      font-size: rem(14);
+    }
   }
 
   &__icon {
     width: rem(100);
     height: rem(100);
+
+    @include mq('tablet-wide') {
+      width: rem(80);
+      height: rem(80);
+    }
+
+    @include mq('tablet') {
+      width: rem(60);
+      height: rem(60);
+    }
+
+    @include mq('phablet') {
+      width: rem(40);
+      height: rem(40);
+    }
+
+    @include mq('phone') {
+      width: rem(60);
+      height: rem(60);
+    }
   }
 
-  &__downside {
+  &__weather {
     @include display(flex, space-around, center);
-  }
-
-  &__date {
-    @include font-sans(rem(24), $main-color, 600, normal);
-    margin-right: rem(20);
+    flex-direction: column;
   }
 
   &__weather-description {
     @include font-sans(rem(24), $main-color, 600, normal);
+
+    @include mq('desktop-wide') {
+      font-size: rem(18);
+    }
+
+    @include mq('tablet-wide') {
+      font-size: rem(16);
+    }
+
+    @include mq('tablet') {
+      font-size: rem(14);
+      font-weight: normal;
+    }
+
+    @include mq('phone') {
+      font-size: rem(18);
+      font-weight: normal;
+    }
   }
 }

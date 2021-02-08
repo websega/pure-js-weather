@@ -162,7 +162,7 @@ window.addEventListener('DOMContentLoaded', () => {
             src="assets/img/cloud-details.svg"
             alt="icon"
           />
-          <div>
+          <div class="weather-details__info">
             <div class="weather-details__title">Облачность</div>
             <div class="weather-details__value cloudy">${weather.clouds.all}%</div>
           </div>
@@ -174,7 +174,7 @@ window.addEventListener('DOMContentLoaded', () => {
             src="assets/img/humidity-details.svg"
             alt="icon"
           />
-          <div>
+          <div class="weather-details__info">
             <div class="weather-details__title">Влажность</div>
             <div class="weather-details__value humidity">${weather.main.humidity}%</div>
           </div>
@@ -186,7 +186,7 @@ window.addEventListener('DOMContentLoaded', () => {
             src="assets/img/wind-details.svg"
             alt="icon"
           />
-          <div>
+          <div class="weather-details__info">
             <div class="weather-details__title">Ветер</div>
             <div class="weather-details__value wind">${weather.wind.speed}m/s</div>
           </div>
@@ -198,7 +198,7 @@ window.addEventListener('DOMContentLoaded', () => {
             src="assets/img/pressure-deatails.svg"
             alt="icon"
           />
-          <div>
+          <div class="weather-details__info">
             <div class="weather-details__title">Давление</div>
             <div class="weather-details__value pressure">${weather.main.pressure}hPa</div>
           </div>
@@ -309,9 +309,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
         const weather = await getCoordWeather(coord);
 
-        // const image = await getImage(weather.weather[0].main);
-        // setBackground(image.urls.full);
-        // renderAuthor(image.user.links.html, image.user.name);
+        const image = await getImage(weather.weather[0].main);
+        setBackground(image.urls.full);
+        renderAuthor(image.user.links.html, image.user.name);
 
         forecast = await getForecast(coord);
 

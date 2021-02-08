@@ -1,12 +1,44 @@
 .weather-details {
   @include display(flex, center, center);
-  margin-bottom: rem(180);
+
+  @include mq('phone') {
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+  }
 
   &__item {
     @include display(flex, center, flex-start);
 
+    @include mq('phablet') {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    @include mq('phone') {
+      margin-bottom: rem(15);
+      width: rem(100);
+    }
+
     &:not(:last-child) {
       margin-right: rem(68);
+
+      @include mq('tablet-small') {
+        margin-right: rem(38);
+      }
+
+      @include mq('phablet') {
+        margin-right: rem(32);
+      }
+
+      @include mq('phone') {
+        margin-right: rem(0);
+      }
+    }
+
+    &:nth-child(odd) {
+      @include mq('phone') {
+        margin-right: rem(22);
+      }
     }
   }
 
@@ -14,13 +46,63 @@
     width: rem(32);
     height: rem(32);
     margin-right: rem(14);
+
+    @include mq('desktop-wide') {
+      width: rem(28);
+      height: rem(28);
+    }
+
+    @include mq('tablet-wide') {
+      width: rem(26);
+      height: rem(26);
+    }
+
+    @include mq('tablet') {
+      width: rem(22);
+      height: rem(22);
+    }
+
+    @include mq('phablet') {
+      width: rem(18);
+      height: rem(18);
+      margin-right: rem(0);
+    }
   }
 
   &__title {
     @include font-sans(rem(24), $main-color, 400, normal);
+
+    @include mq('desktop-wide') {
+      font-size: rem(18);
+    }
+
+    @include mq('tablet-wide') {
+      font-size: rem(16);
+    }
+
+    @include mq('tablet') {
+      font-size: rem(14);
+    }
   }
 
   &__value {
     @include font-sans(rem(36), $main-color, 400, normal);
+
+    @include mq('desktop-wide') {
+      font-size: rem(24);
+    }
+
+    @include mq('tablet-wide') {
+      font-size: rem(16);
+    }
+
+    @include mq('tablet') {
+      font-size: rem(14);
+    }
+  }
+
+  &__info {
+    @include display(flex, center, center);
+    flex-direction: column;
   }
 }

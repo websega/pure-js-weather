@@ -1,12 +1,39 @@
 .header {
   @include display(flex, space-between, center);
-  margin-bottom: rem(116);
+
+  @include mq('phone-wide') {
+    flex-direction: column
+  }
 
   &__autor {
     @include font-sans(rem(18), $main-color, 400, normal);
+
+    @include mq('desktop-wide') {
+      font-size: rem(16);
+    }
+
+    @include mq('tablet-wide') {
+      font-size: rem(14);
+    }
+
+    @include mq('tablet') {
+      font-size: rem(12);
+    }
   }
 
   &__link {
     @include font-sans(rem(18), $main-color, 400, normal);
+
+    @include mq('desktop-wide') {
+      font-size: rem(16);
+    }
+
+    @include mq('tablet-wide') {
+      font-size: rem(14);
+    }
+
+    @include mq('tablet-wide') {
+      font-size: rem(12);
+    }
   }
 }
