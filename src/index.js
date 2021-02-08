@@ -60,7 +60,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
   const renderInfo = (weather) => {
     info.innerText = '';
+
     const now = new Date();
+
     const html = `
     <div class="info__temperature">
       <span class="info__value">
@@ -69,32 +71,33 @@ window.addEventListener('DOMContentLoaded', () => {
       <span class="info__scale">C</span>
     </div>
 
-    <div class="info__item">
+
       <div class="info__body">
         <div class="info__cityname">
           ${weather.name}
         </div>
+        <div class="info__date">
+          ${now.getHours()}:${now.getMinutes()} - ${createDate(now)}
+        </div>
+      </div>
+
+
+
+      <div class="info__weather">
         <img class="info__icon" src="assets/img/weather/${weather.weather[0].icon.slice(
           0,
           2
         )}.svg" alt="weathericon" />
-      </div>
-
-      <div class="info__downside">
-        <div class="info__date">
-          ${now.getHours()}:${now.getMinutes()} - ${createDate(now)}
-        </div>
         <div class="info__weather-description">${
           weather.weather[0].description
         }</div>
       </div>
-    </div>
     `;
 
     info.insertAdjacentHTML('beforeend', html);
   };
 
-  const getForecastItem = (time, icon, temp) => {
+  const createForecastHTML = (time, icon, temp) => {
     return `
     <div class="forecast__item">
       <div class="forecast__time">${time}</div>
@@ -111,35 +114,47 @@ window.addEventListener('DOMContentLoaded', () => {
     `;
   };
 
-  const renderForecast = ({ daily, hourly }) => {
-    forecastEl.innerText = '';
+  const getForecastItems = (array) => {
+    let day = '';
+    let icon = '';
+    let temperature = '';
     let out = '';
 
-    if (selectedTab === 'daily') {
-      daily.forEach((item) => {
-        const date = new Date(item.dt * 1000);
-        const day = `${days[date.getDay()]}`;
-        const icon = `${item.weather[0].icon.slice(0, 2)}`;
-        const temp = `${Math.round(item.temp.day)}`;
+    array.forEach((item) => {
+      const date = new Date(item.dt * 1000);
 
-        out += getForecastItem(day, icon, temp);
-      });
-    } else {
-      hourly.slice(0, 12).forEach((item) => {
-        const date = new Date(item.dt * 1000);
-        const time = `${date.getHours()}:0${date.getMinutes()}`;
-        const icon = `${item.weather[0].icon.slice(0, 2)}`;
-        const temp = `${Math.round(item.temp)}`;
+      day =
+        selectedTab === 'daily'
+          ? `${days[date.getDay()]}`
+          : `${date.getHours()}:0${date.getMinutes()}`;
 
-        out += getForecastItem(time, icon, temp);
-      });
-    }
+      icon = `${item.weather[0].icon.slice(0, 2)}`;
 
-    forecastEl.insertAdjacentHTML('beforeend', out);
+      temperature =
+        selectedTab === 'daily'
+          ? `${Math.round(item.temp.day)}`
+          : `${Math.round(item.temp)}`;
+
+      out += createForecastHTML(day, icon, temperature);
+    });
+
+    return out;
+  };
+
+  const renderForecast = ({ daily, hourly }) => {
+    forecastEl.innerText = '';
+
+    const items =
+      selectedTab === 'daily'
+        ? getForecastItems(daily)
+        : getForecastItems(hourly);
+
+    forecastEl.insertAdjacentHTML('beforeend', items);
   };
 
   const renderWeatherDetails = (weather) => {
     weatherDetails.innerText = '';
+
     const html = `
     <div class="weather-details__item">
           <img
@@ -202,6 +217,7 @@ window.addEventListener('DOMContentLoaded', () => {
       'href',
       `${url}?utm_source=weather_app&utm_medium=referral`
     );
+
     autorName.innerText = `${name}`;
   };
 
@@ -293,9 +309,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
         const weather = await getCoordWeather(coord);
 
-        const image = await getImage(weather.weather[0].main);
-        setBackground(image.urls.full);
-        renderAuthor(image.user.links.html, image.user.name);
+        // const image = await getImage(weather.weather[0].main);
+        // setBackground(image.urls.full);
+        // renderAuthor(image.user.links.html, image.user.name);
 
         forecast = await getForecast(coord);
 
