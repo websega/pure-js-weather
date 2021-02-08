@@ -237,8 +237,12 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   };
 
+  const getImageUrl = (image, isMobile) =>
+    isMobile ? image.urls.regular : image.urls.full;
+
   const submitHandler = async (e) => {
     e.preventDefault();
+    
     const cityName = e.target.input__search.value;
 
     if (!cityName.trim()) {
@@ -261,7 +265,8 @@ window.addEventListener('DOMContentLoaded', () => {
     renderWeatherDetails(cityWeather);
 
     const image = await getImage(cityWeather.weather[0].main);
-    setBackground(image.urls.full);
+
+    setBackground(getImageUrl(image));
     renderAuthor(image.user.links.html, image.user.name);
 
     coord.lon = cityWeather.coord.lon;
@@ -293,6 +298,20 @@ window.addEventListener('DOMContentLoaded', () => {
   };
 
   const init = () => {
+    let isMobile = false;
+
+    if (
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(
+        navigator.userAgent
+      )
+    ) {
+      console.log('Вы используете мобильное устройство (телефон или планшет).');
+      isMobile = true;
+    } else {
+      console.log('Вы используете ПК.');
+      isMobile = false;
+    }
+
     // сделать активный класс для первого таба
     selectedTab = 'daily';
     setActiveCls(tabsBtns);
@@ -310,7 +329,8 @@ window.addEventListener('DOMContentLoaded', () => {
         const weather = await getCoordWeather(coord);
 
         const image = await getImage(weather.weather[0].main);
-        setBackground(image.urls.full);
+
+        setBackground(getImageUrl(image, isMobile));
         renderAuthor(image.user.links.html, image.user.name);
 
         forecast = await getForecast(coord);
