@@ -122,7 +122,6 @@ window.addEventListener('DOMContentLoaded', () => {
          />
       <div class="forecast__temperature">
         <span class="forecast__value">${temp}&#176;</span>
-       <span class="forecast__scale">C</span>
       </div>
     </div>
     `;
@@ -245,7 +244,7 @@ window.addEventListener('DOMContentLoaded', () => {
   };
 
   /**
-   * Вывести на страницу инофрмацию об авторе фото
+   * Вывести на страницу иноформацию об авторе фото
    * @param {String} url адрес автора фото
    * @param {String} name имя автора фото
    */
@@ -293,10 +292,8 @@ window.addEventListener('DOMContentLoaded', () => {
         navigator.userAgent
       )
     ) {
-      console.log('Вы используете мобильное устройство (телефон или планшет).');
       return true;
     }
-    console.log('Вы используете ПК.');
     return false;
   };
 
@@ -386,10 +383,15 @@ window.addEventListener('DOMContentLoaded', () => {
 
         const weather = await getCoordWeather(coord);
 
-        const image = await getImage(weather.weather[0].main);
+        const image = await getImage(weather.weather[0].main).catch((err) => {
+          console.log(err);
+          renderAuthor('', 'Image not found');
+        });
 
-        setBackground(getImageUrl(image));
-        renderAuthor(image.user.links.html, image.user.name);
+        if (image) {
+          setBackground(getImageUrl(image));
+          renderAuthor(image.user.links.html, image.user.name);
+        }
 
         forecast = await getForecast(coord);
 

@@ -33,12 +33,11 @@
   }
 
   &__temperature {
-    @include display(flex, center, flex-end);
+    @include display(flex, center, flex-start);
   }
 
   &__value {
-    @include font-sans(rem(48), $main-color, 600, normal);
-    margin-right: rem(10);
+    @include font-sans(rem(48), $main-color, 400, normal);
 
     @include mq('tablet-wide') {
       font-size: rem(22);
@@ -51,7 +50,7 @@
   }
 
   &__scale {
-    @include font-sans(rem(24), $main-color, 600, normal);
+    @include font-sans(rem(24), $main-color, 400, normal);
 
     @include mq('tablet-wide') {
       font-size: rem(18);

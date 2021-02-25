@@ -7,8 +7,12 @@
     align-items: center;
   }
 
+  &__temperature {
+    @include display(flex, center, flex-start);
+  }
+
   &__value {
-    @include font-sans(rem(100), $main-color, 600, normal);
+    @include font-sans(rem(100), $main-color, 400, normal);
     text-transform: uppercase;
 
     @include mq('desktop-wide') {
@@ -33,7 +37,7 @@
   }
 
   &__scale {
-    @include font-sans(rem(64), $main-color, 600, normal);
+    @include font-sans(rem(64), $main-color, 400, normal, 1.7);
     text-transform: uppercase;
 
     @include mq('desktop-wide') {
@@ -63,7 +67,7 @@
   }
 
   &__cityname {
-    @include font-sans(rem(64), $main-color, 600, normal);
+    @include font-sans(rem(64), $main-color, 400, normal);
 
     @include mq('desktop-wide') {
       font-size: rem(48);
@@ -88,7 +92,7 @@
   }
 
   &__date {
-    @include font-sans(rem(24), $main-color, 600, normal);
+    @include font-sans(rem(24), $main-color, 400, normal);
 
     @include mq('desktop-wide') {
       font-size: rem(18);
@@ -143,7 +147,7 @@
   }
 
   &__weather-description {
-    @include font-sans(rem(24), $main-color, 600, normal);
+    @include font-sans(rem(24), $main-color, 400, normal);
 
     @include mq('desktop-wide') {
       font-size: rem(18);

@@ -14,7 +14,7 @@ class UnsplashApi {
 
       if (!response.ok) {
         throw new Error(
-          `Не удалось получить ${this.url}, код ошибки ${response.status}`
+          `Не удалось получить изображение по адресу ${this.url}, код ошибки ${response.status}`
         );
       }
 
