@@ -4,12 +4,13 @@
 
 Погодное приложение, использующее api [openweather](https://openweathermap.org/api) для получения погодных данных и [unsplash](https://unsplash.com/developers) для вывода фонового изображения.
 
-[Кликни, чтобы посмотреть](https://weather-c5499.web.app/)
+[Посмотреть демо](https://weather-c5499.web.app/)
 
 ![alt text](./preview.png)
 
-##### Install
+---
 
+##### Install
 1. Установить пакеты  ```npm i```
 2. В корне проекта создайте файл ```.env```, в который поместите соответствующий API_KEY из используемых сервисов.
 
