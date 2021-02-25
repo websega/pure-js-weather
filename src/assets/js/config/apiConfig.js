@@ -8,4 +8,9 @@ const imageConfig = {
   key: process.env.UNSPLASH_API_KEY,
 };
 
-export { weatherConfig, imageConfig };
+const ipConfig = {
+  url: 'https://geo.ipify.org/api',
+  key: process.env.IP_API_KEY,
+};
+
+export { weatherConfig, imageConfig, ipConfig };

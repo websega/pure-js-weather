@@ -1,3 +1,4 @@
+import ipApi from './assets/js/service/ipServise';
 import imageApi from './assets/js/service/unsplashService';
 import weatherApi from './assets/js/service/weatherService';
 import './assets/scss/style.scss';
@@ -13,7 +14,7 @@ window.addEventListener('DOMContentLoaded', () => {
   const autorLink = document.querySelector('.header__link');
   const autorName = document.querySelector('.header__name');
   let selectedTab = null;
-  const coord = { lon: 0, lat: 0 };
+  const coordinates = { lon: 0, lat: 0 };
   let forecast = {};
 
   const months = [
@@ -48,6 +49,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // запросы к unsplash api
   const getImage = (word) => imageApi.image(word);
+
+  // запросы за ip
+  const getIpPosition = () => ipApi.ip();
 
   /**
    * Получение текушей даты
@@ -338,10 +342,10 @@ window.addEventListener('DOMContentLoaded', () => {
     setBackground(getImageUrl(image));
     renderAuthor(image.user.links.html, image.user.name);
 
-    coord.lon = cityWeather.coord.lon;
-    coord.lat = cityWeather.coord.lat;
+    coordinates.lon = cityWeather.coord.lon;
+    coordinates.lat = cityWeather.coord.lat;
 
-    forecast = await getForecast(coord);
+    forecast = await getForecast(coordinates);
     renderForecast(forecast);
 
     e.target.input__search.value = '';
@@ -366,44 +370,51 @@ window.addEventListener('DOMContentLoaded', () => {
     renderForecast(forecast);
   };
 
+  const start = async () => {
+    const weather = await getCoordWeather(coordinates);
+
+    const image = await getImage(weather.weather[0].main).catch((err) => {
+      // eslint-disable-next-line no-console
+      console.log(err);
+      renderAuthor('', 'Image not found');
+    });
+
+    if (image) {
+      setBackground(getImageUrl(image));
+      renderAuthor(image.user.links.html, image.user.name);
+    }
+
+    forecast = await getForecast(coordinates);
+
+    renderInfo(weather);
+    renderWeatherDetails(weather);
+    renderForecast(forecast);
+  };
+
   const init = () => {
     // сделать активный класс для первого таба
     selectedTab = 'daily';
     setActiveCls(tabsBtns);
 
+    const geoOptions = {
+      timeout: 10 * 1000,
+    };
+
+    const geoSuccess = (position) => {
+      coordinates.lon = position.coords.longitude;
+      coordinates.lat = position.coords.latitude;
+      start();
+    };
+
+    const geoError = async () => {
+      const position = await getIpPosition();
+      coordinates.lon = position.location.lng;
+      coordinates.lat = position.location.lat;
+      start();
+    };
+
     // geolocation
     if (navigator.geolocation) {
-      const geoOptions = {
-        timeout: 10 * 1000,
-      };
-
-      const geoSuccess = async (position) => {
-        coord.lon = position.coords.longitude;
-        coord.lat = position.coords.latitude;
-
-        const weather = await getCoordWeather(coord);
-
-        const image = await getImage(weather.weather[0].main).catch((err) => {
-          console.log(err);
-          renderAuthor('', 'Image not found');
-        });
-
-        if (image) {
-          setBackground(getImageUrl(image));
-          renderAuthor(image.user.links.html, image.user.name);
-        }
-
-        forecast = await getForecast(coord);
-
-        renderInfo(weather);
-        renderWeatherDetails(weather);
-        renderForecast(forecast);
-      };
-
-      const geoError = (error) => {
-        throw new Error(`Error geolocation. Error code: ${error.code}`);
-      };
-
       navigator.geolocation.getCurrentPosition(
         geoSuccess,
         geoError,
