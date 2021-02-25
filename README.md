@@ -2,7 +2,7 @@
 
 ![license](https://img.shields.io/github/license/websega/pure-js-weather "license")
 
-Погодное приложение, использующее api [openweather](https://openweathermap.org/api) для получения погодных данных и [unsplash](https://unsplash.com/developers) для вывода фонового изображения.
+Погодное приложение, использующее api [openweather](https://openweathermap.org/api) для получения погодных данных и [unsplash](https://unsplash.com/developers) для вывода фонового изображения и [ipify](https://www.ipify.org/) для координат.
 
 [Посмотреть демо](https://weather-c5499.web.app/)
 
@@ -17,6 +17,7 @@
 ```
 OPENWEATHER_API_KEY='your_api_key_from_openweather'
 UNSPLASH_API_KEY='your_api_key_from_unsplash'
+IP_API_KEY='your_api_key_from_ipify'
 ```
 
 ##### Scripts
