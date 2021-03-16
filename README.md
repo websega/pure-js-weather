@@ -6,7 +6,7 @@
 
 [Посмотреть демо](https://weather-c5499.web.app/)
 
-![alt text](./preview.png)
+![alt-текст](https://imagizer.imageshack.com/img923/2921/Fmdfux.png "preview")
 
 ---
 
